@@ -1,0 +1,32 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="hhtp://tymleaf.org/extras/spring-security">
+
+<nav th:fragment="navi" class="navbar navbar-expand-lg navbar-light bg-light">
+	<div class="container-fluid">
+		<a class="navbar-brand" href="/">To-Do 리스트</a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+			data-bs-target="#navbarNav" aria-controls="navbarNav"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link" href="/todo/list">할 일 목록</a></li>
+				
+				<!-- 로그인 전  인증을 받지 않았냐 라고 물어보는 메서드-->
+				<th:block sec:authorize="isAnonymous()">
+					<li class="nav-item"><a class="nav-link" href="/user/register">회원가입</a></li>
+					<li class="nav-item"><a class="nav-link" href="/user/login">로그인</a></li>
+				</th:block>
+				
+				<!-- 로그인 후 -->
+				<th:block sec:authorize="isAuthenticated()">
+					<li class="nav-item"><a class="nav-link" href="/user/logout">로그아웃</a></li>
+				</th:block>
+			</ul>
+		</div>
+	</div>
+</nav>
+
+</html>

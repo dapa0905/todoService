@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>할 일 상세정보</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- 메인메뉴 -->
+    <div th:replace="~{fragment/navi}"></div>
+
+    <div class="container mt-5" th:object="${todoUpdateForm}">
+		<h2>할 일 상세 정보</h2>
+		<form action="/todo/update" method="post">
+            <div class="mb-3">
+                <label for="title" class="form-label">제목</label>
+                <input type="text" class="form-control" th:field="*{title}" required>
+            </div>
+            <div class="mb-3">
+                <label for="details" class="form-label">상세 내용</label>
+                <textarea class="form-control" th:field="*{details}" rows="3" required>예시 상세 내용</textarea>
+            </div>
+            <div class="mb-3">
+                <label for="dueDate" class="form-label">완료 기한</label>
+                <input type="date" class="form-control" th:field="*{dueDate}" required>
+            </div>
+            <div class="mb-3">
+                <label for="status" class="form-label">상태</label>
+                <select id="status" th:field="*{status}" class="form-select">
+					<th:block th:each="status : ${T(net.dsa.todo.model.Status).values()}">
+	                    <option th:value="${status}" th:text="${status.getDescription()}"></option>
+	                </th:block>
+                </select>
+            </div>
+			<input type="hidden" th:field="*{id}">
+            <button type="submit" class="btn btn-primary">업데이트</button>
+            <button type="button" class="btn btn-danger" th:onclick="|location.href='@{/todo/remove(id = ${todoUpdateForm.id})}'|">삭제</button>
+        </form>
+    </div>
+</body>
+</html>
