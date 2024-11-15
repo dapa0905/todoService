@@ -28,7 +28,7 @@ fi
 echo "> 새 애플리케이션 배포"
 
 # jar 파일을 시간순서대로 정렬한 후 제일 마지막 한 개를 읽어온다
-JAR_NAME="userService-0.0.1-SNAPSHOT.jar"
+JAR_NAME="todoService-0.0.1-SNAPSHOT.jar"
 
 echo "> JAR Name: $JAR_NAME"
 
